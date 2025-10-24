@@ -74,6 +74,20 @@ document.querySelectorAll('.qa-question').forEach(question => {
 });
 
 // ========================================
+// チェックボックスによるボタンの有効/無効切り替え
+// ========================================
+const confirmCheckbox = document.getElementById('confirm-check');
+const submitButton = document.querySelector('.submit-button');
+
+// 初期状態: ボタンを無効化
+submitButton.disabled = true;
+
+// チェックボックスの状態が変わったらボタンの有効/無効を切り替え
+confirmCheckbox.addEventListener('change', function() {
+    submitButton.disabled = !this.checked;
+});
+
+// ========================================
 // お問い合わせフォーム送信処理
 // ========================================
 const contactForm = document.querySelector('.contact-form');

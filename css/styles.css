@@ -521,6 +521,53 @@ section {
     min-height: 150px;
 }
 
+.form-note {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.form-notice {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-notice p {
+    margin: 0;
+    color: #856404;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.form-checkbox {
+    margin-bottom: 1.5rem;
+}
+
+.form-checkbox label {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    font-weight: normal;
+    color: #333;
+}
+
+.form-checkbox input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
+    cursor: pointer;
+    transform: scale(1.2);
+    flex-shrink: 0;
+}
+
+.form-checkbox span {
+    user-select: none;
+}
+
 .submit-button {
     width: 100%;
     padding: 1rem;
@@ -534,9 +581,16 @@ section {
     transition: all 0.3s;
 }
 
-.submit-button:hover {
+.submit-button:hover:not(:disabled) {
     background: #234e52;
     transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+    background: #cbd5e0;
+    color: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
 }
 
 /* ========================================
