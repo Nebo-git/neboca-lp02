@@ -74,6 +74,29 @@ document.querySelectorAll('.qa-question').forEach(question => {
 });
 
 // ========================================
+// 文字数カウンター
+// ========================================
+const messageTextarea = document.getElementById('message');
+const charCountElement = document.getElementById('char-count');
+const charCounterElement = document.querySelector('.char-counter');
+
+messageTextarea.addEventListener('input', function() {
+    const currentLength = this.value.length;
+    charCountElement.textContent = currentLength;
+    
+    // 文字数に応じて色を変える
+    if (currentLength >= 1000) {
+        charCounterElement.classList.add('limit');
+        charCounterElement.classList.remove('warning');
+    } else if (currentLength >= 800) {
+        charCounterElement.classList.add('warning');
+        charCounterElement.classList.remove('limit');
+    } else {
+        charCounterElement.classList.remove('warning', 'limit');
+    }
+});
+
+// ========================================
 // チェックボックスによるボタンの有効/無効切り替え
 // ========================================
 const confirmCheckbox = document.getElementById('confirm-check');
