@@ -667,7 +667,17 @@ footer {
 /* ========================================
    レスポンシブ
 ======================================== */
+/* スマホ・タブレット用の改行はPCでは非表示 */
+.br-mobile {
+    display: none;
+}
+
 @media (max-width: 768px) {
+    /* スマホ・タブレットでは改行を表示 */
+    .br-mobile {
+        display: inline;
+    }
+
     .nav-links {
         display: none;
     }
