@@ -79,17 +79,33 @@ document.querySelectorAll('.qa-question').forEach(question => {
 const contactForm = document.querySelector('.contact-form');
 
 contactForm.addEventListener('submit', function(e) {
-    // Formspreeを使用する場合は、この部分をコメントアウトまたは削除
-    // e.preventDefault();
-    // alert('お問い合わせを受け付けました。担当者より折り返しご連絡いたします。');
-    // this.reset();
+    // メールアドレスの照合チェック
+    const email = document.getElementById('email').value;
+    const emailConfirm = document.getElementById('email-confirm').value;
     
-    // Formspree使用時: action属性にFormspreeのURLが設定されていれば自動で送信される
-    // 特別な処理は不要だが、送信後のカスタム処理を追加したい場合は以下のようにする:
+    if (email !== emailConfirm) {
+        e.preventDefault();
+        alert('メールアドレスが一致しません。もう一度ご確認ください。');
+        document.getElementById('email-confirm').focus();
+        return false;
+    }
     
-    /*
+    // チェックボックスの確認
+    const confirmCheck = document.getElementById('confirm-check');
+    if (!confirmCheck.checked) {
+        e.preventDefault();
+        alert('「上記の内容を確認しました」にチェックを入れてください。');
+        return false;
+    }
+    
+    // Formspreeへの送信をカスタマイズ
     e.preventDefault();
     const formData = new FormData(this);
+    const submitButton = this.querySelector('.submit-button');
+    
+    // ボタンを無効化して二重送信を防止
+    submitButton.disabled = true;
+    submitButton.textContent = '送信中...';
     
     fetch(this.action, {
         method: 'POST',
@@ -99,15 +115,19 @@ contactForm.addEventListener('submit', function(e) {
         }
     }).then(response => {
         if (response.ok) {
-            alert('お問い合わせを受け付けました。担当者より折り返しご連絡いたします。');
+            // 成功メッセージを表示
+            alert('お問い合わせを受け付けました。\n\nご入力いただいたメールアドレス宛に、確認のため担当者よりご連絡いたします。\n通常2-3営業日以内にご返信いたしますので、今しばらくお待ちください。\n\nメールが届かない場合は、迷惑メールフォルダもご確認ください。');
             this.reset();
         } else {
-            alert('送信に失敗しました。もう一度お試しください。');
+            alert('送信に失敗しました。\n恐れ入りますが、もう一度お試しください。');
         }
     }).catch(error => {
-        alert('送信に失敗しました。もう一度お試しください。');
+        alert('送信に失敗しました。\n恐れ入りますが、もう一度お試しください。');
+    }).finally(() => {
+        // ボタンを元に戻す
+        submitButton.disabled = false;
+        submitButton.textContent = '送信する';
     });
-    */
 });
 
 // ========================================
